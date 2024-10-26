@@ -80,6 +80,6 @@ def bot():
         result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
         await ctx.send(result)
 
-    bot.run("MTI5Njk3ODM3Nzg1NjY1MTMyNg.Gsgdqp.Q-9Nva_dUk-OQWtyq30R_Lz9xIqy9f-QpIydH0")
+    bot.run("TOKEN HERE")
 
 bot()
