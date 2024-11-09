@@ -1,7 +1,10 @@
 from settings import *
 import discord
 from bot_logic import *
-
+import os
+import random
+from get_duck import *
+from get_apokemon import *
 def client():
     # La variable intents almacena los privilegios del bot
     intents = discord.Intents.default()
@@ -31,7 +34,7 @@ def client():
         else:
             await message.channel.send(message.content)
 
-    client.run("MTI5Njk3ODM3Nzg1NjY1MTMyNg.Gsgdqp.Q-9Nva_dUk-OQWtyq30R_Lz9xIqy9f-QpIydH0")
+    client.run("TOKEN HERE")
 
 def bot():
     from discord.ext import commands
@@ -68,7 +71,33 @@ def bot():
     @bot.command()
     async def Planta(ctx):
         await ctx.send(plantaR())
-
+    @bot.command()
+    async def mem(ctx):
+        with open('bot//images//meme1.jpeg', 'rb') as f:
+            # ¡Vamos a almacenar el archivo de la biblioteca Discord convertido en esta variable!
+            picture = discord.File(f)
+        # A continuación, podemos enviar este archivo como parámetro.
+        await ctx.send(file=picture)
+    @bot.command()
+    async def memealeatorio(ctx):
+        meme = random.choice(os.listdir('bot//images'))
+        with open(f'bot//images//{meme}', 'rb') as f:
+            # ¡Vamos a almacenar el archivo de la biblioteca Discord convertido en esta variable!
+            picture = discord.File(f)
+        # A continuación, podemos enviar este archivo como parámetro.
+        await ctx.send(file=picture)
+    @bot.command('duck')
+    async def duck(ctx):
+        '''Una vez que llamamos al comando duck, 
+        el programa llama a la función get_duck_image_url'''
+        image_url = get_duck_image_url()
+        await ctx.send(image_url)
+    @bot.command('pokemon')
+    async def pokemon(ctx):
+        '''Una vez que llamamos al comando pokemon, 
+        el programa llama a la función get_pokemon_img_url'''
+        image_url = get_apokemon_img_url()
+        await ctx.send(image_url)
     @bot.command()
     async def roll(ctx, dice: str):
         """Rolls a dice in NdN format."""
